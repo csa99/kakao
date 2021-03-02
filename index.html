@@ -35,30 +35,8 @@
                 <a href=local.html><b>지역검색</b></a>
             </div>
             <div id="content">
-                <br><h1>[블로그검색]</h1>
-                <div id="divSearch">
-                    <input type="text" id="txtQuery" value="자바"/>
-                    <input type="button" value=" 검 색 " id="btnSearch"/>
-                    <select id="selSize">
-                        <option value=5>5개 출력</option>
-                        <option value=10 selected>10개 출력</option>
-                        <option value=15>15개 출력</option>
-                        <option value=20>20개 출력</option>
-                    </select>
-                    <span id="total"></span>
-                    <br><br>
-                    <table id="tblBlog" width=600></table>
-                    <script id="temp" type="text/x-handlebars-template">
-                        <tr class="title">
-                            <th>블로그 제목</th>
-                        </tr>
-                        {{#each documents}}
-                        <tr class="row">
-                            <td><a href="{{url}}">{{{title}}}</a></td>
-                        </tr>
-                        {{/each}}
-                    </script>
-                </div>
+                
+            </div>
                 <br><div id="divPage">
                     <button id="btnPre">◀</button>
                     <span id="page"></span>
