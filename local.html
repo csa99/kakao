@@ -1,0 +1,140 @@
+
+<html>
+    <head>
+        <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+        <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=cbdba0278ca1f3d82996610ebd3222a0"></script>
+        <title>지역검색</title>
+        <link rel="stylesheet" href="style1.css">
+        <style>
+            #page{
+                background: #F2B035;
+            }
+            #top{
+                width: 800px; height: 50px;
+                background: #F29191;
+                margin: 0px auto; padding-top: 30px;
+                text-align: center; font-size: large;
+            }
+            #content{
+                width: 800px;
+                background: #F2B035;
+                margin: 0px auto;
+                text-align: center;
+            }
+            #bottom{
+                width: 800px; height: 80px;
+                background: #26A699;
+                margin: 0px auto; padding-top: 20px;
+                text-align: center;
+            }
+            #divPage{
+                background: #F2B035;
+            }
+            #map{
+                margin: 0px auto;
+                border: black dotted 2px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="top">
+            <a href=blog.html><b>블로그검색&nbsp;&nbsp;&nbsp;</b></a>
+            |&nbsp;
+            <a href=book.html><b>&nbsp;&nbsp;도서검색&nbsp;&nbsp;&nbsp;</b></a>
+            |&nbsp;
+            <a href=local.html><b>&nbsp;&nbsp;지역검색&nbsp;&nbsp;&nbsp;</b></a>
+        </div>
+        <div id="content">
+            <br><h1>[지역검색]</h1>
+        <div id="divSearch">
+            <input type="text" id="txtQuery" value="인천일보"/>
+            <input type="button" value=" 검색 " id="btnSearch"/>
+            <select id="selSize">
+                <option value=5>5개 출력</option>
+                <option value=10 selected>10개 출력</option>
+                <option value=15>15개 출력</option>
+                <option value=20>20개 출력</option>
+            </select>
+            <span id="total"></span>
+        </div><br>
+        <br>
+            <table id="tblBlog"></table>
+            <script id="temp" type="text/x-handlebars-template">
+                <tr class="title" width=800>
+                    <th width=150>매장명</th>
+                    <th width=350>주소</th>
+                    <th width=100>전화번호</th>
+                    <th>지도</th>
+                </tr>
+                {{#each documents}}
+                <tr class="row">
+                    <td>{{place_name}}</td>
+                    <td>{{road_address_name}}</td>
+                    <td>{{phone}}</td>
+                    <td width=100><button x="{{x}}" y="{{y}}">열기</button></td>
+                </tr>
+                {{/each}}
+            </script>
+            <br><div id="divPage">
+                <button id="btnPre">◀</button>
+                <span id="page"></span>
+                <button id="btnNext">▶</button>
+            </div><br>
+           
+        </div>
+        <div id="bottom">
+            <h4>작성자 : 인천일보아카데미 최신애</h4>
+        </div>
+        <div id="darken-background">
+            <div id="lightbox">
+                <h2>[지도]</h2>
+                <div id="map" style="width:500px; height:400px;"></div>
+                <br><div><button id="btnClose">닫기</button></div><br>
+            </div>
+        </div>
+    </body>
+    <script>
+        var url="https://dapi.kakao.com/v2/local/search/keyword.json";
+
+        $("#tblBlog").on("click", ".row button", function(){
+            $("#darken-background").show();
+            var x=$(this).attr("x"); //this=버튼
+            var y=$(this).attr("y");
+            getMap(x, y);
+        });
+        function getMap(x, y){
+            var container = document.getElementById('map');
+            var options = {
+            center: new kakao.maps.LatLng(y, x),
+            level: 2
+            };
+            var map = new kakao.maps.Map(container, options);
+            var markerPosition  = new kakao.maps.LatLng(y, x);
+            var marker = new kakao.maps.Marker({
+            position: markerPosition
+            });
+            marker.setMap(map);
+        }
+
+        $("#btnClose").on("click", function(){
+            $("#darken-background").hide();
+        });
+
+        /*지도
+        $("#tblBlog").on("click", ".row button", function(){
+            var x=$(this).attr("x"); //this=버튼
+            var y=$(this).attr("y");
+            getMap(x, y);
+        });
+        function getMap(x, y){
+            var container = document.getElementById('map');
+            var options = {
+            center: new kakao.maps.LatLng(y, x),
+            level: 2
+            };
+            var map = new kakao.maps.Map(container, options);
+        }*/
+    </script>
+    <script src="script.js"></script>
+</html>

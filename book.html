@@ -1,0 +1,129 @@
+<html>
+    <head>
+        <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.1/handlebars.js"></script>
+        <title>도서검색</title>
+        <link rel="stylesheet" href="style1.css">
+        <style>
+            #tblBlog{
+                width: 750px; border-radius: 20px;
+                border-collapse: collapse;
+                margin: 0px auto;
+                border: 0px;
+            }
+            #divSearch{
+                width: 750px; margin: 0px auto;
+            }
+            #contents{
+                width: 500px;
+                text-align:left;
+                font-size: medium;
+            }
+            #image{
+                text-align:center;
+                box-shadow: 10px 10px 10px gray;
+                border: black 1px solid;
+            }
+            .box{
+                text-align: center;
+                margin-top: 15px; margin-bottom: 15px;
+                margin-left: 27px; margin-right: 5px;
+                width: 200px; height: 235px; float: left;
+                padding: 5px;
+                border-radius: 10px; color: #000000;
+            }
+            .ellipsis { 
+                white-space:nowrap; overflow:hidden; text-overflow:ellipsis; 
+                font-size:14px; width:200px;
+            }
+            #page{
+                background: #F2B035;
+            }
+            #top{
+                width: 800px; height: 50px;
+                background: #F29191;
+                margin: 0px auto; padding-top: 30px;
+                text-align: center; font-size: large;
+            }
+            #content{
+                width: 800px;
+                background: #F2B035;
+                margin: 0px auto;
+                text-align: center;
+            }
+            #bottom{
+                width: 800px; height: 80px;
+                background: #26A699;
+                margin: 0px auto; padding-top: 20px;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="top">
+            <a href=blog.html><b>블로그검색&nbsp;&nbsp;&nbsp;</b></a>
+            |&nbsp;
+            <a href=book.html><b>&nbsp;&nbsp;도서검색&nbsp;&nbsp;&nbsp;</b></a>
+            |&nbsp;
+            <a href=local.html><b>&nbsp;&nbsp;지역검색&nbsp;&nbsp;&nbsp;</b></a>
+        </div>
+        <div id="content">
+                <br><h1>[도서검색]</h1>
+            <div id="divSearch">
+                <input type="text" id="txtQuery" value="자바"/>
+                <input type="button" value=" 검색 " id="btnSearch"/>
+                <select id="selSize">
+                    <option value=3>3개 출력</option>
+                    <option value=6 selected>6개 출력</option>
+                    <option value=9>9개 출력</option>
+                    <option value=12>12개 출력</option>
+                </select>
+                <span id="total"></span>
+            </div><br>
+                <table id="tblBlog"></table>
+                <script id="temp" type="text/x-handlebars-template">
+                    {{#each documents}}
+                    <div class="box">
+                        <img src="{{thumbnail}}" title="{{title}}" price="{{price}}원" contents="{{contents}}" style="box-shadow: 10px 10px 10px;"><br><br>
+                        <div class="ellipsis"><b>{{{title}}}</b></div>
+                        <div>{{price}}원</div>
+                    </div>
+                    {{/each}}
+                </script>
+            <br><div id="divPage">
+                <button id="btnPre">◀</button>
+                <span id="page"></span>
+                <button id="btnNext">▶</button>
+            </div><br>
+        </div>
+        <div id="bottom">
+            <h4>작성자 : 인천일보아카데미 최신애</h4>
+        </div>    
+        <!--라이트박스-->
+        <div id="darken-background">
+            <div id="lightbox">
+                <br><div><img id="image" src="https://placehold.it/500x500" width=200/></div>
+                <br><br><div id="title"><b></b></div>
+                <div id="price"></div>
+                <br><div id="contents" style="font-size: small;"></div>
+                <br><div><button id="btnClose">닫기</button></div><br>
+            </div>
+        </div>
+    </body>
+    <script>
+        var url="https://dapi.kakao.com/v3/search/book?target=title";
+        
+        $("#tblBlog").on("click", ".box img", function(){
+            $("#image").attr("src", $(this).attr("src"));
+            $("#contents").html($(this).attr("contents"));
+            $("#darken-background").show();
+            $("#title").html($(this).attr("title"));
+            $("#price").html($(this).attr("price"));
+        });
+
+        $("#btnClose").on("click", function(){
+            $("#darken-background").hide();
+        });
+    </script>
+    <script src="script.js"></script>
+</html>

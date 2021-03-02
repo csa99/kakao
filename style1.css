@@ -1,0 +1,54 @@
+*{font-family: '맑은 고딕';}
+body{
+    background: #E3DDCA;
+}
+#tblBlog, th, td{
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    border-collapse: collapse;
+    margin: 0px auto; text-align: center;
+    padding: 5px;
+}
+td{
+    font-size: small;
+}
+#tbl .row:nth-child(2n+1){
+    background: #F4A261;
+}
+.title{
+    border: 2px black solid;
+    border-collapse: collapse;
+    font-size: large;
+    background: #F24141;
+}
+#divSearch{
+    text-align: center;
+}
+#divPage{text-align: center ; font-size: small;}
+h1{text-align: center;}
+#tblBlog .row:hover{background:#D94436; color: ghostwhite;}
+a{text-decoration: none; color: black;}
+a:active {text-decoration: none; color: black;}
+a:hover {text-decoration: none; color:ghostwhite;;}
+#darken-background {
+    position:absolute;
+    margin: 0px auto;
+    top:0px;
+    left:0px;
+    right:0px;
+    height:100%;
+    display:none;
+    background:rgba(0, 0, 0, 0.5);
+    z-index:10000;
+    overflow-y:scroll;
+}
+#lightbox {
+    width:510px; 
+    margin: 60px auto;
+    padding:20px;
+    border: 1px solid #333333;
+    border-radius:20px;
+    background:white; opacity: 95%;
+    box-shadow:0px 5px 5px rgba(34, 25, 25, 0.4);
+    text-align:center;
+}
